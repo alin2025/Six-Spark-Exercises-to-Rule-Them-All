@@ -22,3 +22,4 @@ sales_table.groupby(col("date")).agg(countDistinct(col("product_id")).alias("dis
     col("distinct_products_sold").desc()).show()
 
 spark.stop()
+#
