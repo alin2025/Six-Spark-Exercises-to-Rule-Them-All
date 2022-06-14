@@ -108,3 +108,4 @@ sellers.show()
 sellers.write.parquet("sellers_parquet", mode="overwrite")
 
 spark.stop()
+
