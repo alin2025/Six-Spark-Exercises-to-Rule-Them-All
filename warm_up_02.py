@@ -15,11 +15,10 @@ products_table = spark.read.parquet("./products_parquet")
 sales_table = spark.read.parquet("./sales_parquet")
 sellers_table = spark.read.parquet("./sellers_parquet")
 
-#   Output how many products have been actually sold at least once
-print("Number of products sold at least once")
-sales_table.agg(countDistinct(col("product_id"))).show()
 
-#   Output which is the product that has been sold in more orders
-print("Product present in more orders")
-sales_table.groupBy(col("product_id")).agg(
-    count("*").alias("cnt")).orderBy(col("cnt").desc()).limit(1).show()
+#   Output how many distinct products have been sold in each date
+print("how many distinct products have been sold in each date")
+sales_table.groupby(col("date")).agg(countDistinct(col("product_id")).alias("distinct_products_sold")).orderBy(
+    col("distinct_products_sold").desc()).show()
+
+spark.stop()
